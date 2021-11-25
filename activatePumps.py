@@ -1,6 +1,6 @@
 import RPi.GPIO as gpio
 import time
-SHOT_TIME = 60
+SHOT_TIME = 17
 
 def setup():
 	gpio.setmode(gpio.BCM)

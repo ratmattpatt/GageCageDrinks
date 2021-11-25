@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import request
+from flask import request, render_template
 from flask_cors import CORS
 import json
 from activatePumps import setup, activatePumps, cleanup
@@ -8,8 +8,8 @@ app = Flask(__name__)
 CORS(app)
 
 @app.route("/")
-def hello():
-	return "Gage Cage Drinks Server!"
+def index():
+	return render_template("drinks.html")
 
 @app.route("/makedrink", methods=['POST'])
 def makedrink():
