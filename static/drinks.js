@@ -50,7 +50,7 @@ window.onload = function() {
           checkDrink();
       }
 
-      if (e.target.id == "create-drink-button") {
+      if (e.target.id == "create-drink-container") {
         makeable = false;
         updateIngredientSelect();
         $('#create-drink-modal').css("display", "block");
@@ -91,8 +91,8 @@ window.onload = function() {
       }
   });
 
-  addCreateDrinkButton = function() {
-    let block = '<div class="drink-display" style="background-color: #aaaaaa" id="create-drink-button">';
+  addCreateDrink = function() {
+    let block = '<div class="drink-display" style="background-color: #aaaaaa" id="create-drink-container">';
     block += '<h3>Create New Drink!</h3><span style="font-size: 150px; margin: 70px 130px" class="glyphicon glyphicon-plus"></span></div>';
     
     let html = $('#drink-container').html()
@@ -113,13 +113,14 @@ window.onload = function() {
         block += '<li>' + u + '</li>';
       }
       block += '</ul>'
+      block += '<img src="../static/assets/' + recipes[r].glass_type + '.png" class="drink-display-icon">'
       block += '</div>';
 
       let html = $('#drink-container').html()
       $('#drink-container').html(html + block);
     }
 
-    addCreateDrinkButton();
+    addCreateDrink();
   }
   updatePumps = function() {
     for (let i = 1; i < 9; i++) {
@@ -464,7 +465,8 @@ function getAddIngredientElement() {
   body += '</div>';
   body += '<div style="display: flex;">';
   body += '<h4>Amount: </h4>';
-  body += '<input type="range" min="0" max="9" step="1" value="1" class="recipe-ingredient-amount" style="width: 150px;">';
+  body += '<input type="range" min="0" max="9" step="1" value="1" class="recipe-ingredient-amount" style="width: 150px;" oninput="this.nextElementSibling.value = this.value">';
+  body += '<output>1</output>'
   body += '</div>';
   body += '</div>';
 
