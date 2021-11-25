@@ -1,11 +1,12 @@
 from flask import Flask
-from flask import request, render_template
+from flask import request, abort, render_template
 from flask_cors import CORS
 import json
 from activatePumps import setup, activatePumps, cleanup
 
 app = Flask(__name__)
 CORS(app)
+MAKING_DRINK = False
 
 @app.route("/")
 def index():
@@ -13,8 +14,14 @@ def index():
 
 @app.route("/makedrink", methods=['POST'])
 def makedrink():
-	activatePumps(json.loads(request.data))
-	return "Success!"
+	global MAKING_DRINK
+	if (not MAKING_DRINK): 
+		MAKING_DRINK = True
+		result = activatePumps(json.loads(request.data))
+		MAKING_DRINK = False
+	else:
+		result = "Making drink!"
+	return result
 
 @app.route("/pumps", methods=['GET', 'POST'])
 def pumps():

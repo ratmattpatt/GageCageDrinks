@@ -15,7 +15,12 @@ def setup():
 	gpio.setup(8, gpio.OUT)
 	gpio.setup(9, gpio.OUT)
 
+	gpio.setup(17, gpio.IN)
+
 def activatePumps(pumpArray):
+	#if (gpio.input(17) == 0):
+	#	return "No cup!"
+	
 	for i in range(8):
 		if pumpArray[i] > 0:
 			gpio.output((i+2), gpio.HIGH)
@@ -26,6 +31,8 @@ def activatePumps(pumpArray):
 				gpio.output((i+2), gpio.LOW)
 			pumpArray[i] -= 1
 		time.sleep(SHOT_TIME)
+
+	return "Success!"
 
 def cleanup():
 	gpio.cleanup()

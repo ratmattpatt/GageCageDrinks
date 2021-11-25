@@ -40,20 +40,21 @@ window.onload = function() {
 
   document.onclick = function(e) {
     if (e.target.classList.value.includes("drink-display")) {
+      if (e.target.id == "create-drink-container") {
+        makeable = false;
+        updateIngredientSelect();
+        $('#create-drink-modal').css("display", "block");
+        return;
+      }
+      
       for (r in recipes) {
        if (recipes[r].name == e.target.id.substr(6))
           // Recipe exists, set it as the current recipe
           currentRecipe = recipes[r];
           // Set the current drink name
-          $("#current-drink").html(currentRecipe.name);
+          $("#current-drink").html(capitalize(currentRecipe.name));
           // Check if the drink can be made with the current pump ingredients
           checkDrink();
-      }
-
-      if (e.target.id == "create-drink-container") {
-        makeable = false;
-        updateIngredientSelect();
-        $('#create-drink-modal').css("display", "block");
       }
     }
   }
@@ -67,7 +68,12 @@ window.onload = function() {
         url: "http://192.168.1.187:5000/makedrink",
         data: JSON.stringify(convertRecipeToPumpArray()),
         success: function(data) {
-          console.log(data);
+          if (data == "No cup!")
+            alert("No cup in the machine! Make sure there is a cup there before trying to make a drink!");
+          else if (data == "Making drink!")
+            alert("Drink machine is currently in use! Please wait until the machine is done making the current drink before you make yours!")
+          else
+            console.log(data);
         },
         error: function(e) {
           console.error(e);
