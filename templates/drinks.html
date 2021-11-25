@@ -66,7 +66,7 @@
     <!-- END COLOR PICKER -->
 
     <!-- MAIN WINDOW -->
-    <div id="drink-window" style="width: 100vw; height: 77.25vh;">
+    <div id="drink-window" style="width: 100vw; height: 83%;">
         <div id="drink-container">
         </div>
     </div>
@@ -98,7 +98,8 @@
             </div>
             <div style="display: flex;">
               <h4>Amount: </h4>
-              <input type="range" min="0" max="9" step="1" value="1" class="recipe-ingredient-amount" style="width: 150px;">
+              <input type="range" min="0" max="9" step="1" value="1" class="recipe-ingredient-amount" style="width: 150px;" oninput="this.nextElementSibling.value = this.value">
+              <output>1</output>
             </div>
           </div>
         </div>

@@ -81,12 +81,18 @@
     margin: 10px;
 }
 .drink-display {
+    position: relative;
     margin: 20px;
     padding: 10px;
     border-radius: 10px;
     width: 300px;
     height: 300px;
     box-shadow: 10px 10px 5px #000000aa;
+}
+.drink-display-icon {
+    position: absolute;
+    bottom: 0px;
+    left: 150px;
 }
 #drink-container {
     overflow: scroll;
