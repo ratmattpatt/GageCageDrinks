@@ -1,0 +1,1 @@
+[{"name": "Gin_&_Tonic", "pumpable": {"gin": 1}, "unpumpable": {"tonic water": "top_up"}, "color": "yellow", "glass_type": "short"}, {"name": "Grateful_Dead", "pumpable": {"gin": 1, "tequila": 1, "rum": 1, "vodka": 1, "raspberry liqueur": 1}, "unpumpable": {}, "color": "pink", "glass_type": "tom_collins"}]
