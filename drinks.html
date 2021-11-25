@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <script src="./drinks.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./drinks.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+  <!-- HEADER BAR -->
+  <body style="height: 100vh; width: 100vw; overflow: hidden;">
+    <div id="header-bar" style="padding: 10px 20px; min-width: 650px;">
+      <div class="wrapper header-wrapper" id="left-header-bar">
+            <div class="col-md header-column">
+                <h1 style="margin-top: 10px;">Gage Cage Drinks</h1>
+            </div>
+      </div>
+      <div class="wrapper header-wrapper" id="right-header-bar">
+            <div class="col-md header-column" id="pumppicker-toggle">
+                <span class="glyphicon glyphicon-cog" style="cursor: pointer; font-size: 150%; margin: 10px; padding-top: 10px;"></span>
+                <h2 style="margin-top: 15px;">Current Pump Ingredients</h2>
+            </div>
+        </div>
+    </div>
+    <!-- END HEADER BAR -->
+    
+    <!-- EDIT PUMPS (SIDE BAR) -->
+    <div id="pump-picker">
+      <div class="sidebar-header" style="padding: 0px 15px;">
+        <h2>Edit Pumps</h2>
+      </div>
+      <div class="container" style="width: 100%; background-color: #fefeff;">
+        <div class="row-md pump-row-input">
+            <h4>Pump 1: </h4>
+            <button type="button" class="btn btn-sm btn-pump" id="pump-button-1" style="margin: 0px 5px;">None</button>
+        </div>
+        <div class="row-md pump-row-input">
+            <h4>Pump 2: </h4>
+            <button type="button" class="btn btn-sm btn-pump" id="pump-button-2" style="margin: 0px 5px;">None</button>
+        </div>
+        <div class="row-md pump-row-input">
+            <h4>Pump 3: </h4>
+            <button type="button" class="btn btn-sm btn-pump" id="pump-button-3" style="margin: 0px 5px;">None</button>
+        </div>
+        <div class="row-md pump-row-input">
+            <h4>Pump 4: </h4>
+            <button type="button" class="btn btn-sm btn-pump" id="pump-button-4" style="margin: 0px 5px;">None</button>
+        </div>
+        <div class="row-md pump-row-input">
+            <h4>Pump 5: </h4>
+            <button type="button" class="btn btn-sm btn-pump" id="pump-button-5" style="margin: 0px 5px;">None</button>
+        </div>
+        <div class="row-md pump-row-input">
+            <h4>Pump 6: </h4>
+            <button type="button" class="btn btn-sm btn-pump" id="pump-button-6" style="margin: 0px 5px;">None</button>
+        </div>
+        <div class="row-md pump-row-input">
+            <h4>Pump 7: </h4>
+            <button type="button" class="btn btn-sm btn-pump" id="pump-button-7" style="margin: 0px 5px;">None</button>
+        </div>
+        <div class="row-md pump-row-input">
+            <h4>Pump 8: </h4>
+            <button type="button" class="btn btn-sm btn-pump" id="pump-button-8" style="margin: 0px 5px;">None</button>
+        </div>
+      </div>
+    </div>
+    <!-- END COLOR PICKER -->
+
+    <!-- MAIN WINDOW -->
+    <div id="drink-window" style="width: 100vw; height: 77.25vh;">
+        <div id="drink-container">
+        </div>
+    </div>
+    <!-- END MAIN WINDOW -->
+
+    <!-- FOOTER BAR -->
+    <div class="container" id="footer-bar">
+      <h4>Current Drink: </h4>
+      <div id="current-drink-container">
+        <h5 id="current-drink">None</h5>
+      </div>
+      <button type="button" class="btn btn-danger" id="make-drink">Make Drink!</button>
+    </div>
+    <!-- END FOOTER BAR -->
+
+    <!-- MODALS -->
+    <div id="create-drink-modal" class="modal">
+      <div class="modal-content">
+          <span class="modal-close" id="create-drink-modal-close">&times;</span>
+        <div class="modal-header" id="create-drink-modal-header" style="border-bottom: 0px;">
+          <h2 style="margin: 10px;">Drink Name: </h2>
+          <input type="text" placeholder="" id="create-drink-name" style="height: 30px; margin: 10px;"/>
+        </div>
+        <div class="modal-body" id="create-drink-modal-body" style="padding: 0px 15px; border-bottom: 1px solid #888888; border-top: 1px solid #888888;">
+          <div class="row-md drink-ingredient-create">
+            <div style="display: flex;">
+              <h4>Ingredient: </h4>
+              <select class="recipe-ingredient-select"></select>
+            </div>
+            <div style="display: flex;">
+              <h4>Amount: </h4>
+              <input type="range" min="0" max="9" step="1" value="1" class="recipe-ingredient-amount" style="width: 150px;">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" id="create-drink-modal-footer">
+          <button class="btn btn-primary" id="add-ingredient" style="width: 100%; margin: 5px;"><span class="glyphicon glyphicon-plus"></span> Add Another Ingredient</button>
+          <button class="btn btn-primary" id="create-drink-button" style="width: 100%; margin: 5px;"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!--<div id="edit-profile-modal" class="modal">
+      <div class="modal-content">
+          <span class="modal-close" id="edit-profile-modal-close">&times;</span>
+        <div class="modal-header" id="edit-profile-modal-header" style="border-bottom: 0px;">
+            <h2 style="margin: 10px;">Edit Profile</h2>
+            <h2 id="edit-profile-name" style="margin: 10px 0px;"></h2>
+        </div>
+        <div class="modal-body" id="edit-profile-modal-body" style="padding: 0px 15px; border-bottom: 1px solid #888888; border-top: 1px solid #888888;">
+            <div class="row-md color-row-edit">
+              <h4>Lows: </h4>
+              <div class="color-input color-input-wrapper" id="low-color-edit-wrapper" style="opacity: 1;">
+              </div>
+            </div>
+            <div class="row-md color-row-edit">
+              <h4>Highs: </h4>
+              <div class="color-input color-input-wrapper" id="high-color-edit-wrapper" style="opacity: 1;">
+              </div>
+            </div>
+            <div class="row-md color-row-edit">
+              <h4>Undertones: </h4>
+              <div class="color-input color-input-wrapper" id="undertone-color-edit-wrapper" style="opacity: 1;">
+              </div>
+            </div>
+            <div class="row-md color-row-edit">
+              <h4>Background: </h4>
+              <div class="color-input color-input-wrapper" id="background-color-edit-wrapper" style="opacity: 1;">
+              </div>
+            </div>
+          </div>
+        <div class="modal-footer" id="edit-profile-modal-footer" style="display: flex;">
+          <button class="btn btn-primary" id="edit-profile-button" style="margin: 0% 5%; width: 40%;"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+          <button class="btn btn-light" id="cancel-edit-profile-button" style="margin: 0% 5%; width: 40%;"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+        </div>
+      </div>
+    </div>-->
+
+    <div id="choose-ingredient-modal" class="modal">
+      <div class="modal-content">
+          <span class="modal-close" id="choose-ingredient-modal-close">&times;</span>
+        <div class="modal-header" id="choose-ingredient-modal-header" style="border-bottom: 0px;">
+          <h2 style="margin: 10px;">Choose Ingredient: </h2>
+          <select id="ingredient-select"></select>
+        </div>
+        <div class="modal-body" id="choose-ingredient-modal-body" style="padding: 0px 15px; border-bottom: 1px solid #888888; border-top: 1px solid #888888;">
+          <div>
+            <h3>Add New Ingredient: </h3>
+            <input type="text" id="new-ingredient">
+          </div>
+          <div>
+            <input type="checkbox" id="pumpable-checkbox">
+            <label for="pumpable-checkbox">
+              New ingredient pumpable?
+            </label>
+            <button class="btn btn-info" id="add-ingredient-button">Add!</button>
+          </div>
+        </div>
+        <div class="modal-footer" id="choose-ingredient-modal-footer" style="display: flex;">
+            <button class="btn btn-primary" id="choose-ingredient-button" style="width: 100%;"><span class="glyphicon glyphicon-ok"></span> Choose</button>
+        </div>
+      </div>
+    </div>
+    <!-- END MODALS -->
+
+  </body>
+</html>
