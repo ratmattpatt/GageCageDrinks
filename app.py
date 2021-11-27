@@ -29,7 +29,7 @@ def pumps():
 	pumps = json.load(f)
 
 	if request.method == 'GET':
-		result = json.dumps(pumps, separators=(",", ":"))
+		result = json.dumps(pumps, separators=(",", ":"), indent=4)
 		f.close()
 		return result
 	if request.method == 'POST':
@@ -46,7 +46,7 @@ def recipes():
 	recipes = json.load(f)
 
 	if request.method == 'GET':
-		result = json.dumps(recipes, separators=(",", ":"))
+		result = json.dumps(recipes, separators=(",", ":"), indent=4)
 		f.close()
 		return result
 	if request.method == 'POST':
@@ -63,7 +63,7 @@ def pumpable():
 	pumpable = json.load(f)
 
 	if request.method == 'GET':
-		result = json.dumps(pumpable, separators=(",", ":"))
+		result = json.dumps(pumpable, separators=(",", ":"), indent=4)
 		f.close()
 		return result
 	if request.method == 'POST':
@@ -81,7 +81,7 @@ def unpumpable():
 	unpumpable = json.load(f)
 
 	if request.method == 'GET':
-		result = json.dumps(unpumpable, separators=(",", ":"))
+		result = json.dumps(unpumpable, separators=(",", ":"), indent=4)
 		f.close()
 		return result
 	if request.method == 'POST':

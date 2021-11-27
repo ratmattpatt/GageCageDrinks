@@ -447,7 +447,7 @@ window.onload = function() {
     $.ajax({
       type: "POST",
       contentType: "application/json",
-      url: "http://192.168.1.187:5000/pumps",
+      url: "http://192.168.1.186:5000/pumps",
       data: JSON.stringify(pumps),
       success: function(data) {
         console.log(data);
