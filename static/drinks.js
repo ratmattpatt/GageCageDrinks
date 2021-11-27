@@ -65,7 +65,7 @@ window.onload = function() {
       $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "http://192.168.1.187:5000/makedrink",
+        url: "http://192.168.1.186:5000/makedrink",
         data: JSON.stringify(convertRecipeToPumpArray()),
         success: function(data) {
           if (data == "No cup!")
@@ -138,7 +138,7 @@ window.onload = function() {
     $.ajax({
       type: "GET",
       contentType: "application/json",
-      url: "http://192.168.1.187:5000/recipes",
+      url: "http://192.168.1.186:5000/recipes",
       success: function(data) {
         recipes = JSON.parse(data);
 
@@ -153,7 +153,7 @@ window.onload = function() {
     $.ajax({
       type: "GET",
       contentType: "application/json",
-      url: "http://192.168.1.187:5000/pumps",
+      url: "http://192.168.1.186:5000/pumps",
       success: function(data) {
         pumps = JSON.parse(data);
 
@@ -169,7 +169,7 @@ window.onload = function() {
     $.ajax({
       type: "GET",
       contentType: "application/json",
-      url: "http://192.168.1.187:5000/pumpable",
+      url: "http://192.168.1.186:5000/pumpable",
       success: function(data) {
         pumpable = JSON.parse(data);
       },
@@ -181,7 +181,7 @@ window.onload = function() {
     $.ajax({
       type: "GET",
       contentType: "application/json",
-      url: "http://192.168.1.187:5000/unpumpable",
+      url: "http://192.168.1.186:5000/unpumpable",
       success: function(data) {
         unpumpable = JSON.parse(data);
       },
@@ -271,7 +271,7 @@ window.onload = function() {
           $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "http://192.168.1.187:5000/pumpable",
+            url: "http://192.168.1.186:5000/pumpable",
             data: newIngredient,
             success: function(data) {
               console.log(data);
@@ -293,7 +293,7 @@ window.onload = function() {
           $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "http://192.168.1.187:5000/unpumpable",
+            url: "http://192.168.1.186:5000/unpumpable",
             data: newIngredient,
             success: function(data) {
               console.log(data);
@@ -408,7 +408,7 @@ window.onload = function() {
       $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "http://192.168.1.187:5000/recipes",
+        url: "http://192.168.1.186:5000/recipes",
         data: JSON.stringify(newRecipe),
         success: function(data) {
           console.log(data);
