@@ -29,16 +29,16 @@ def activatePumps(pumpArray):
 		if pumpArray[i] > 0:
 			gpio.output((i+2), gpio.HIGH)
 
-	while(any(pump >= 0 for pump in pumpArray)):
+	while(any(pump > 0 for pump in pumpArray)):
+		time.sleep(SHOT_TIME)
 		for i in range(8):
-			if pumpArray[i] <= 0:
+			if pumpArray[i] <= 1:
 				gpio.output((i+2), gpio.LOW)
 			pumpArray[i] -= 1
-		time.sleep(SHOT_TIME)
 	
 	# mix the ingredients!
 	gpio.output(27, gpio.HIGH)
-	time.sleep(5)
+	time.sleep(8)
 	gpio.output(27, gpio.LOW)
 
 	return "Success!"
