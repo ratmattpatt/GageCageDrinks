@@ -8,12 +8,6 @@ window.onload = function() {
   let currentPump = 0;
   let makeable = false;
 
-  let colorTable = { 
-    "yellow": "#ffff3b",
-    "pink": "#fa5ee5",
-    "temp": "#3333ff"
-  }
-
   checkDrink = function() { 
     makeable = true;
     let required = currentRecipe.pumpable;
@@ -108,7 +102,7 @@ window.onload = function() {
     $('#drink-container').html("");
     
     for (r in recipes) {
-      let block = '<div class="drink-display" style="background-color: ' + colorTable[recipes[r].color] + '" id="drink-' + recipes[r].name + '">';
+      let block = '<div class="drink-display" style="background-color: ' + recipes[r].color + '" id="drink-' + recipes[r].name + '">';
       block += '<h3>' + capitalize(recipes[r].name) + '</h3>';
       block += '<ul>';
       for (p in recipes[r].pumpable) {
@@ -369,6 +363,8 @@ window.onload = function() {
       else
         amounts.push(createAmount[i].value);
     }
+    let glasstype = $("#create-drink-glass-type").val();
+    let color = $("#create-drink-color-picker").val();
     
     // Check new recipe data
     let goodRecipe = true;
@@ -399,10 +395,8 @@ window.onload = function() {
 
       newRecipe.pumpable = pumpableObj;
       newRecipe.unpumpable = unpumpableObj;
-      // TODO add color and glass type support :D
-      newRecipe.color = "temp";
-      newRecipe.glass_type = "temp";
-      // ----------------------------------------
+      newRecipe.color = color;
+      newRecipe.glass_type = glasstype;
 
       // Send new recipe to the server
       $.ajax({
