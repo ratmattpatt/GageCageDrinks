@@ -86,9 +86,32 @@
     <div id="create-drink-modal" class="modal">
       <div class="modal-content">
           <span class="modal-close" id="create-drink-modal-close">&times;</span>
-        <div class="modal-header" id="create-drink-modal-header" style="border-bottom: 0px;">
-          <h2 style="margin: 10px;">Drink Name: </h2>
-          <input type="text" placeholder="" id="create-drink-name" style="height: 30px; margin: 10px;"/>
+        <div id="create-drink-modal-header" style="border-bottom: 0px;">
+          <div style="display: flex;">
+            <h2 style="margin: 10px;">Drink Name: </h2>
+            <input type="text" placeholder="" id="create-drink-name" style="height: 30px; margin: 10px;"/>
+          </div>
+          <div style="display: flex; justify-content: space-between">
+            <div style="display: flex;">
+              <h4 style="margin: 10px;">Glass Type: </h4>
+              <select id="create-drink-glass-type" style="height: 30px; margin: 10px;">
+                <option value="cognac">Cognac</option>
+                <option value="cosmo">Cosmo</option>
+                <option value="hurricane">Hurricane</option>
+                <option value="margarita">Margarita</option>
+                <option value="martini">Martini</option>
+                <option value="pint">Pint</option>
+                <option value="short">Short</option>
+                <option selected="selected" value="tall">Tall</option>
+                <option value="tom_collins">Tom Collins</option>
+                <option value="wine">Wine</option>
+              </select>
+            </div>
+            <div style="display: flex;">
+              <h4 style="margin: 10px;">Color:</h4>
+              <input id="create-drink-color-picker" type="color" value="#888888" style="height: 30px; margin: 10px;"/>
+            </div>
+          </div>
         </div>
         <div class="modal-body" id="create-drink-modal-body" style="padding: 0px 15px; border-bottom: 1px solid #888888; border-top: 1px solid #888888;">
           <div class="row-md drink-ingredient-create">
@@ -98,7 +121,7 @@
             </div>
             <div style="display: flex;">
               <h4>Amount: </h4>
-              <input type="range" min="0" max="9" step="1" value="1" class="recipe-ingredient-amount" style="width: 150px;" oninput="this.nextElementSibling.value = this.value">
+              <input type="range" min="0" max="9" step="0.5" value="1" class="recipe-ingredient-amount" style="width: 150px;" oninput="this.nextElementSibling.value = this.value">
               <output>1</output>
             </div>
           </div>
