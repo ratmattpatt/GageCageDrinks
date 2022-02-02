@@ -16,15 +16,14 @@ def setup():
 	gpio.setup(8, gpio.OUT)
 	gpio.setup(9, gpio.OUT)
 
-	# setup pressure plate:
-	gpio.setup(17, gpio.IN)
 	# setup mixer:
 	gpio.setup(27, gpio.OUT)
 
+	# turn on cpu fan
+	gpio.setup(20, gpio.OUT)
+	gpio.output(20, gpio.HIGH)
+
 def activatePumps(pumpArray):
-	if (gpio.input(17) == 0):
-		return "No cup!"
-	
 	for i in range(8):
 		if pumpArray[i] > 0:
 			gpio.output((i+2), gpio.HIGH)
@@ -44,4 +43,5 @@ def activatePumps(pumpArray):
 	return "Success!"
 
 def cleanup():
+	gpio.output(20, gpio.LOW)
 	gpio.cleanup()
