@@ -50,10 +50,16 @@
     animation-name: animatetop;
     animation-duration: 0.4s
 }
+#create-ingredient-modal-content {
+    top: 30vh;
+    left: 30vw;
+    width: 40vw;
+}
 .modal-header {
     padding: 0px 15px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 .modal-close {
     color: #aaaaaa;
@@ -69,6 +75,14 @@
     cursor: pointer;
 }
 
+select {
+    width: 40%;
+    font-size: 18px;
+    text-align: center;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #888888;
+}
 .drink-ingredient-create {
     display: flex;
     justify-content: space-between;
@@ -94,24 +108,30 @@
     bottom: 0px;
     left: 150px;
 }
+#view {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    user-select: none;
+}
 #drink-container {
-    overflow: scroll;
+    overflow-y: scroll;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    width: 100%;
-    height: 109%;
+    width: 100vw;
+    height: calc(100vh - 160px);
 }
 #pump-picker {
     margin-right: 0px;
     height: 90vh;
     min-height: 90vh;
-    min-width: 20vw;
-    max-width: 20vw;
+    width: 250px;
     background-color: #eeeef2;
     position: absolute;
-    right: -20vw;
+    right: -250px;
     top: 0px;
+    z-index: 5;
 }
 #pump-picker.open {
     right: 0px;
@@ -119,17 +139,17 @@
     animation-duration: 0.2s;
 }
 #pump-picker.closed {
-    right: -20vw;
+    right: -250px;
     animation-name: pumppickerclose;
     animation-duration: 0.2s;
 }
 @keyframes pumppickeropen {
-    from {right: -20vw;}
+    from {right: -250px;}
     to {right: 0px;}
 }
 @keyframes pumppickerclose {
     from {right: 0px;}
-    to {right: -20vw;}
+    to {right: -250px;}
 }
 #pumppicker-toggle {
     display: flex;
@@ -144,7 +164,7 @@
    max-height: 15vh;
 }
 #header-bar.open {
-    width: 80vw;
+    width: calc(100vw - 250px);
     animation-name: headerbaropen;
     animation-duration: 0.2s;
 }
@@ -155,28 +175,13 @@
 }
 @keyframes headerbaropen {
     from {width: 100vw;}
-    to {width: 80vw;}
+    to {width: calc(100vw - 250px);}
 }
 @keyframes headerbarclose {
-    from {width: 80vw;}
+    from {width: calc(100vw - 250px);}
     to {width: 100vw;}
 }
-#file-picker {
-    width: 20px;
-}
-#save-profile-name {
-    margin: 15px;
-}
-#color-profile-container {
-    overflow-y: scroll;
-    max-height: 28vh;
-    width: 100%;
-    padding: 0px;
-}
-@keyframes animatetop {
-    from {top: -50vh; opacity: 0;}
-    to {top: 25vh; opacity: 1;}
-}
+
 #footer-bar {
     height: 10vh;
     width: 100vw;
