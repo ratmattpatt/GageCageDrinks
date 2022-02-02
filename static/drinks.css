@@ -96,6 +96,7 @@ select {
 }
 .drink-display {
     position: relative;
+    cursor: pointer;
     margin: 20px;
     padding: 10px;
     border-radius: 10px;
@@ -113,6 +114,7 @@ select {
     width: 100vw;
     overflow: hidden;
     user-select: none;
+    touch-action: manipulation;
 }
 #drink-container {
     overflow-y: scroll;
