@@ -1,4 +1,4 @@
-const DRINKSERVER = "http://192.168.1.186:5000/";
+const DRINKSERVER = "http://192.168.1.188:5000/";
 
 var serverData = {};
 serverData["pumps"] = {};
