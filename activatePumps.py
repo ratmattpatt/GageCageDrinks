@@ -23,6 +23,12 @@ def setup():
 	gpio.setup(20, gpio.OUT)
 	gpio.output(20, gpio.HIGH)
 
+def stir():
+    # mix the ingredients!
+	gpio.output(27, gpio.HIGH)
+	time.sleep(8)
+	gpio.output(27, gpio.LOW)
+
 def activatePumps(pumpArray):
 	for i in range(8):
 		if pumpArray[i] > 0:
@@ -35,10 +41,7 @@ def activatePumps(pumpArray):
 				gpio.output((i+2), gpio.LOW)
 			pumpArray[i] -= 1
 	
-	# mix the ingredients!
-	gpio.output(27, gpio.HIGH)
-	time.sleep(8)
-	gpio.output(27, gpio.LOW)
+	stir()
 
 	return "Success!"
 

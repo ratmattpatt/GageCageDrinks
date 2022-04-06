@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request, abort, render_template
 from flask_cors import CORS
 import json
-from activatePumps import setup, activatePumps, cleanup
+from activatePumps import setup, stir, activatePumps, cleanup
 
 app = Flask(__name__)
 CORS(app)
@@ -92,6 +92,11 @@ def unpumpable():
 		json.dump(unpumpable, f)
 		f.close()
 		return "Success!"
+
+@app.route("/stir", methods=['GET'])
+def run_stirrer():
+	stir()
+
 
 if __name__ == "__main__":
 	setup()

@@ -198,6 +198,10 @@ $(document).ready(function() {
     $('#header-bar').toggleClass("open");
     $('#header-bar').toggleClass("closed");
   });
+  $('#stir-test').click(function() {
+    if (confirm("Would you like to stir your drink again?"))
+      ajaxGET("stir");
+  });
   
   $('.btn-pump').click(function(e) {
       $('#choose-ingredient-modal').css("display", "block");
@@ -296,6 +300,11 @@ $(document).ready(function() {
       s.options[s.options.length] = new Option(capitalize(pumpable[p]), pumpable[p]);
     for (u in unpumpable)
       s.options[s.options.length] = new Option(capitalize(unpumpable[u]), unpumpable[u]);
+
+    let oldHeight = $("#create-drink-modal-content").css("height");
+    if (parseInt(oldHeight.substr(0,3)) >= 710)
+      oldHeight = "710px";
+    $("#create-drink-modal-content").css("top", "calc((100vh - " + oldHeight + ") / 2)");
   });
   
   $("#create-drink-button").click(function() {    

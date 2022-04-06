@@ -55,6 +55,9 @@
     left: 30vw;
     width: 40vw;
 }
+#create-drink-modal-content {
+    top: calc((100vh - 370px) / 2);
+}
 .modal-header {
     padding: 0px 15px;
     display: flex;
@@ -118,6 +121,7 @@ select {
 }
 #drink-container {
     overflow-y: scroll;
+    overflow-x: hidden;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
