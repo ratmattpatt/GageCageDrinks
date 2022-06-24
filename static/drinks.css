@@ -1,11 +1,62 @@
-/******************** DRINKS ********************/
-.header-column {
-    float: left;
-    margin: 8px;
-}
+/******************************************* HEADER BAR *******************************************/
+#header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #eeeef2;
+    margin: 0px;
+    width: 100vw;
+    height: 15vh;
+ }
 .header-wrapper {
     display: flex;
     align-items: center;
+}
+.icon-button {
+    cursor: pointer;
+    font-size: 25px;
+    margin: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #888888;
+}
+
+/******************************************* SIDE BAR *******************************************/
+#pump-picker {
+    margin-right: 0px;
+    height: 90vh;
+    min-height: 90vh;
+    width: 250px;
+    background-color: #eeeef2;
+    position: absolute;
+    right: -250px;
+    top: 0px;
+    z-index: 5;
+}
+#pump-picker.open {
+    right: 0px;
+    animation-name: pump-pickeropen;
+    animation-duration: 0.2s;
+}
+#pump-picker.closed {
+    right: -250px;
+    animation-name: pump-pickerclose;
+    animation-duration: 0.2s;
+}
+@keyframes pump-pickeropen {
+    from {right: -250px;}
+    to {right: 0px;}
+}
+@keyframes pump-pickerclose {
+    from {right: 0px;}
+    to {right: -250px;}
+}
+#pump-picker-open {
+    margin: 10px;
+    margin-right: 0px;
+    display: flex;
 }
 .pump-row-input, .pump-profile, .pump-row-save, .pump-row-edit, .pump-row-delete {
     display: flex;
@@ -27,75 +78,26 @@
     background-color: black;
     box-shadow: 2px 2px 5px grey;
 }
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-}
-.modal-content {
-    margin: 0px;
-    top: 25vh;
-    left: 25vw;
-    width: 50vw;
-    height: content;
-    border: 1px solid #888888;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    animation-name: animatetop;
-    animation-duration: 0.4s
-}
-#create-ingredient-modal-content {
-    top: 30vh;
-    left: 30vw;
-    width: 40vw;
-}
-#create-drink-modal-content {
-    top: calc((100vh - 370px) / 2);
-}
-.modal-header {
-    padding: 0px 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.modal-close {
-    color: #aaaaaa;
-    float: right;
-    top: 0px;
-    padding: 0px 10px;
-    font-size: 28px;
-    font-weight: bold;
-  }  
-.modal-close:hover, .modal-close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+#btn-pump {
+    margin: 0px 5px;
 }
 
-select {
-    width: 40%;
-    font-size: 18px;
-    text-align: center;
-    height: 30px;
-    border-radius: 5px;
-    border: 1px solid #888888;
+/******************************************* MAIN WINDOW *******************************************/
+#view {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    user-select: none;
+    touch-action: manipulation;
 }
-.drink-ingredient-create {
+#drink-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
     display: flex;
-    justify-content: space-between;
-    padding: 10px;
-}
-.recipe-ingredient-select {
-    margin: 10px;
-}
-.recipe-ingredient-amount {
-    margin: 10px;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    width: 100vw;
+    height: 75vh;
 }
 .drink-display {
     position: relative;
@@ -112,82 +114,8 @@ select {
     bottom: 0px;
     left: 150px;
 }
-#view {
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    user-select: none;
-    touch-action: manipulation;
-}
-#drink-container {
-    overflow-y: scroll;
-    overflow-x: hidden;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    width: 100vw;
-    height: calc(100vh - 160px);
-}
-#pump-picker {
-    margin-right: 0px;
-    height: 90vh;
-    min-height: 90vh;
-    width: 250px;
-    background-color: #eeeef2;
-    position: absolute;
-    right: -250px;
-    top: 0px;
-    z-index: 5;
-}
-#pump-picker.open {
-    right: 0px;
-    animation-name: pumppickeropen;
-    animation-duration: 0.2s;
-}
-#pump-picker.closed {
-    right: -250px;
-    animation-name: pumppickerclose;
-    animation-duration: 0.2s;
-}
-@keyframes pumppickeropen {
-    from {right: -250px;}
-    to {right: 0px;}
-}
-@keyframes pumppickerclose {
-    from {right: 0px;}
-    to {right: -250px;}
-}
-#pumppicker-toggle {
-    display: flex;
-}
-#header-bar {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   background-color: #eeeef2;
-   margin: 0px;
-   width: 100vw;
-   max-height: 15vh;
-}
-#header-bar.open {
-    width: calc(100vw - 250px);
-    animation-name: headerbaropen;
-    animation-duration: 0.2s;
-}
-#header-bar.closed {
-    width: 100vw;
-    animation-name: headerbarclose;
-    animation-duration: 0.2s;
-}
-@keyframes headerbaropen {
-    from {width: 100vw;}
-    to {width: calc(100vw - 250px);}
-}
-@keyframes headerbarclose {
-    from {width: calc(100vw - 250px);}
-    to {width: 100vw;}
-}
 
+/******************************************* FOOTER BAR *******************************************/
 #footer-bar {
     height: 10vh;
     width: 100vw;
@@ -205,5 +133,136 @@ select {
 }
 #make-drink {
     float: right;
+    width: 30%;
+}
+
+/******************************************* MODALS *******************************************/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+    margin: 0px;
+    top: 10vh;
+    left: 20vw;
+    width: 60vw;
+    height: content;
+    border: 1px solid #888888;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+#create-ingredient-modal-content {
+    top: 30vh;
+    left: 30vw;
+    width: 40vw;
+}
+.modal-header {
+    padding: 15px;
+    padding-bottom: 5px;
+    border-bottom: 0px;
+}
+.modal-close {
+    color: #aaaaaa;
+    float: right;
+    top: 0px;
+    padding: 0px 10px;
+    font-size: 28px;
+    font-weight: bold;
+}  
+.modal-close:hover, .modal-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.modal-title {
+    font-size: 20px;
+}
+
+.modal-body {
+    border-bottom: 1px solid #888888;
+    border-top: 1px solid #888888;
+}
+.modal-container {
+    display: flex;
+    justify-content: space-between;
+}
+.drink-ingredient-create {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.recipe-ingredient-amount {
+    height: 30px;
+    width: 50px;
+    border: 1px solid #888888;
+}
+#color-input-wrapper {
+    border-radius: 5px;
+    background-color: #888888;
+    height: 30px;
+    width: 60%;
+}
+
+.modal-footer-button {
+    width: 100%;
+    margin: 5px;
+    overflow: hidden;
+}
+#create-drink-modal-footer {
+    padding-right: 25px;
+}
+
+/******************************************* GENERAL *******************************************/
+h1 {
+    margin-top: 10px; 
+    display: inline-block;
+}
+h3 {
+    margin-top: 15px;
+}
+@media (max-width: 735px) {
+    #gage-cage {
+        display: none;
+    }
+}
+@media (max-width: 550px) {
+    #pump-ingredients-title-long {
+        display: none;
+    }
+    #pump-ingredients-title-short {
+        display: block;
+    }
+}
+@media (min-width: 550px) {
+    #pump-ingredients-title-long {
+        display: block;
+    }
+    #pump-ingredients-title-short {
+        display: none;
+    }
+}
+select {
     width: 40%;
+    font-size: 18px;
+    text-align: center;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #888888;
+}
+input {
+    border-radius: 5px;
+    height: 30px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {  
+   opacity: 1;
 }

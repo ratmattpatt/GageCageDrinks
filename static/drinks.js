@@ -1,4 +1,5 @@
-const DRINKSERVER = "http://192.168.1.188:5000/";
+//const DRINKSERVER = "http://192.168.1.188:5000/";
+const DRINKSERVER = "http://localhost:5000/";
 
 var serverData = {};
 serverData["pumps"] = {};
@@ -6,6 +7,7 @@ serverData["recipes"] = {};
 serverData["pumpable"] = {};
 serverData["unpumpable"] = {};
 
+var showAllRecipes = false;
 var currentRecipe = "";
 var currentPump = 0;
 var makeable = false;
@@ -42,20 +44,14 @@ function ajaxPOST(address, data) {
 }
 
 function checkDrink() { 
-  makeable = true;
   let required = currentRecipe.pumpable;
-
   let pumps = serverData["pumps"];
-  let check = false;
-  for (r in required) {
-    for (p in pumps) {
-      if (pumps[p] == r)
-        check = true;
-    }
-    if (!check)
-      makeable = false;
-    check = false;
-  }
+
+  if (required == null || required == undefined)
+    return false;
+  
+  let canMake = (p, r) =>  Object.keys(r).every(i => p.includes(i));
+  let makeable = canMake(pumps, required);
 
   if (makeable) {
     $("#make-drink").removeClass("btn-danger");
@@ -65,15 +61,36 @@ function checkDrink() {
     $("#make-drink").addClass("btn-danger");
   }
 }
+function checkRecipe(recipe) { 
+  let required = recipe.pumpable;
+  let pumps = serverData["pumps"];
+
+  if (required == null || required == undefined)
+    return false;
+
+  let canMake = (p, r) => Object.keys(r).every(i => p.includes(i));
+  return canMake(pumps, required);
+}
 
 function updateDrinkPanels() {
   ajaxGET("recipes").then(() => {
     let recipes = serverData["recipes"];
 
+    recipes.sort((a, b) => b.times_mixed - a.times_mixed);
+
     $('#drink-container').html("");
     
     for (r in recipes) {
-      let block = '<div class="drink-display" style="background-color: ' + recipes[r].color + '" id="drink-' + recipes[r].name + '">';
+      let color = recipes[r].color;
+
+      if (!checkRecipe(recipes[r])) {
+        if (showAllRecipes)
+          color = "#888888";
+        else
+          continue;
+      }
+
+      let block = '<div class="drink-display" style="background-color: ' + color + '" id="drink-' + recipes[r].name + '">';
       block += '<h3>' + capitalize(recipes[r].name) + '</h3>';
       block += '<ul>';
       for (p in recipes[r].pumpable) {
@@ -164,14 +181,17 @@ function updateIngredientLists() {
 }
 
 window.addEventListener('load', function() {
-  updateDrinkPanels();
   updateCurrentPumpIngredients();
+  updateDrinkPanels();
   updateIngredientLists();
 });
 // Add click listeners:
 $(document).ready(function() {
-  $('#make-drink').click(function() {
+  $('#make-drink').on("click touchstart", function() {
     let manualAdditions = "";
+    
+    if (currentRecipe.times_mixed == undefined)
+      currentRecipe.times_mixed = 0;
 
     if (makeable) {
       if (confirm("Please confirm that you would like to make a " + capitalize(currentRecipe.name) + ", and that there is a cup in the machine.")) {
@@ -179,60 +199,80 @@ $(document).ready(function() {
           manualAdditions += "    ";
           if (currentRecipe.unpumpable[u] == 8)
             manualAdditions += "Top up with ";
-          else if (currentRecipe.unpumpable[u] == 1)
-            manualAdditions += "1 shot of ";
-          else
-            manualAdditions += currentRecipe.unpumpable[u] + " shots of ";
+          else {
+            manualAdditions += currentRecipe.unpumpable[u] + " shot";
+            if (currentRecpie.unpumpable[u] > 1)
+              manualAdditions += "s";
+            manualAdditions += " of ";
+          }
           manualAdditions += capitalize(u) + "\n";
         }
-        alert("Add the following ingredients to you drink manually:\n" + manualAdditions);
+        if (manualAdditions.length > 0)
+          alert("Add the following ingredients to you drink manually:\n" + manualAdditions);
+
         ajaxPOST("makedrink", JSON.stringify(convertRecipeToPumpArray()));
+        currentRecipe.times_mixed++;
       }
     } else {
       alert("You don't have the correct ingredients in the pumps right now to make this drink!");
     }
   });
-  $('#pumppicker-toggle').click(function() {
-    $('#pump-picker').toggleClass("open");
-    $('#pump-picker').toggleClass("closed");
-    $('#header-bar').toggleClass("open");
-    $('#header-bar').toggleClass("closed");
+  $("#list-all-button").on("click touchstart", function() {
+    showAllRecipes = !showAllRecipes;
+    updateDrinkPanels();
+
+    if (showAllRecipes)
+      $("#list-all-button").css("background-color", "#66dd66");
+    else
+      $("#list-all-button").css("background-color", "#ffffff");
+  })
+  $('#pump-picker-open').on("click touchend", function() {
+    $('#pump-picker').addClass("open");
+    $('#pump-picker').removeClass("closed");
   });
-  $('#stir-test').click(function() {
+  $('#pump-picker-close').on("click touchend", function() {
+    $('#pump-picker').addClass("closed");
+    $('#pump-picker').removeClass("open");
+  });
+  $('#stir-button').on("click touchstart", function() {
     if (confirm("Would you like to stir your drink again?"))
       ajaxGET("stir");
   });
   
-  $('.btn-pump').click(function(e) {
+  $('.btn-pump').on("click touchstart", function(e) {
       $('#choose-ingredient-modal').css("display", "block");
   
       currentPump = parseInt(e.target.id.substr(-1))-1;
   
       updateIngredientSelector();
   });
-  $("#create-ingredient-modal-button1").click(function() {
+  $("#create-ingredient-modal-button1").on("click touchstart", function() {
     $('#create-ingredient-modal').css("display", "block");
+    console.log("opening modal...");
   });
-  $("#create-ingredient-modal-button2").click(function() {
+  $("#create-ingredient-modal-button2").on("click touchstart", function() {
     $('#create-ingredient-modal').css("display", "block");
+    console.log("opening modal...");
   });
-  $('#choose-ingredient-modal-close').click(function() {
-      $('#choose-ingredient-modal').css("display", "none");
+  $('#choose-ingredient-modal-close').on("click touchstart", function() {
+    $('#choose-ingredient-modal').css("display", "none");
   });
-  $('#create-ingredient-modal-close').click(function() {
+  $('#create-ingredient-modal-close').on("click touchstart", function() {
     $('#create-ingredient-modal').css("display", "none");
   });
-  $('#create-drink-modal-close').click(function() {
+  $('#create-drink-modal-close').on("click touchstart", function() {
     $('#create-drink-modal').css("display", "none");
   });
-  $('#create-ingredient-button').click(function() {
+  $('#create-ingredient-button').on("click touchstart", function() {
     let pumpable = serverData["pumpable"];
     let unpumpable = serverData["unpumpable"]; 
     let field = document.getElementById("new-ingredient");
     let newIngredient = field.value;
   
-    if (newIngredient == "")
+    if (newIngredient == "") {
+      $("#create-ingredient-modal").css("display", "none");
       return;
+    }
   
     newIngredient.replaceAll(" ", "_");
     newIngredient = newIngredient.toLowerCase();
@@ -260,11 +300,11 @@ $(document).ready(function() {
       });
     }
   
-    $("create-ingredient-modal").css("display", "none");
+    $("#create-ingredient-modal").css("display", "none");
     $("#new-ingredient").val("");
   });
   
-  $("#add-ingredient").click(function() {
+  $("#add-ingredient").on("click touchstart", function() {
     let pumpable = serverData["pumpable"];
     let unpumpable = serverData["unpumpable"];
   
@@ -300,14 +340,9 @@ $(document).ready(function() {
       s.options[s.options.length] = new Option(capitalize(pumpable[p]), pumpable[p]);
     for (u in unpumpable)
       s.options[s.options.length] = new Option(capitalize(unpumpable[u]), unpumpable[u]);
-
-    let oldHeight = $("#create-drink-modal-content").css("height");
-    if (parseInt(oldHeight.substr(0,3)) >= 710)
-      oldHeight = "710px";
-    $("#create-drink-modal-content").css("top", "calc((100vh - " + oldHeight + ") / 2)");
   });
   
-  $("#create-drink-button").click(function() {    
+  $("#create-drink-button").on("click touchstart", function() {    
     // Get the new recipe data
     let name = $("#create-drink-name").val();
     let createSelect = document.getElementsByClassName("recipe-ingredient-select");
@@ -365,6 +400,8 @@ $(document).ready(function() {
     }
   
     // Reset create drink modal
+    let pumpable = serverData["pumpable"];
+    let unpumpable = serverData["unpumpable"];
     $("#create-drink-modal-body").html(getAddIngredientElement());
     let i = createSelect.length - 1;
     let s = createSelect[i];
@@ -376,13 +413,21 @@ $(document).ready(function() {
       s.options[s.options.length] = new Option(capitalize(unpumpable[u]), unpumpable[u]);
   
     $("#create-drink-name").val("");
+    
     // Close the modal
     $('#create-drink-modal').css("display", "none");
   });
   
-  $("#choose-ingredient-button").click(function() {
+  $("#choose-ingredient-button").on("click touchstart", function() {
     let pumps = serverData["pumps"];
     let ingredient = document.getElementById("ingredient-select").value;
+
+    if (ingredient in pumps) {
+      alert("This ingredient is already in the machine!");
+      $('#choose-ingredient-modal').css("display", "none");
+      return;
+    }
+
     pumps[currentPump] = ingredient;
   
     ajaxPOST("pumps", JSON.stringify(pumps)).then(() => {
@@ -392,17 +437,25 @@ $(document).ready(function() {
     $('#choose-ingredient-modal').css("display", "none");
   });
 
-  $("#clean-pump-button").click(function() {
+  $("#clean-pump-button").on("click touchstart", function() {
     if (confirm("Please confirm that the selected pump has water in it and there is a cup in the machine.")) {
       let tempPumpArray = [];
+      let pumps = serverData["pumps"];
+
       for (let i = 0; i < 8; i++) {
         if (i == currentPump)
           tempPumpArray.push(3);
         else
           tempPumpArray.push(0);
       }
+
+      pumps[currentPump] = "None";
   
       ajaxPOST("makedrink", JSON.stringify(tempPumpArray));
+      ajaxPOST("pumps", JSON.stringify(pumps));
+
+      updateCurrentPumpIngredients();
+      $('#choose-ingredient-modal').css("display", "none");
     }
   });
 
@@ -411,7 +464,7 @@ $(document).ready(function() {
     document.getElementById("color-input-wrapper").style.backgroundColor = color;
   });
 });
-$(document).click(function(e) {
+$(document).on("click touchstart", function(e) {
   let recipes = serverData["recipes"];
 
   if (e.target.classList.value.includes("drink-display")) {
@@ -421,7 +474,7 @@ $(document).click(function(e) {
       $('#create-drink-modal').css("display", "block");
       return;
     }
-    
+    console.log("click");
     for (r in recipes) {
       if (recipes[r].name == e.target.id.substr(6))
         // Recipe exists, set it as the current recipe
@@ -437,15 +490,9 @@ $(document).click(function(e) {
 // Hard coded ingredient addition html for adding an ingredient to a recipe
 function getAddIngredientElement() {
   let body = '<div class="row-md drink-ingredient-create">';
-  body += '<div style="display: flex;">';
-  body += '<h4>Ingredient: </h4>';
+  body += '<input type="number" min="0.5" max="8" step="0.5" value="1" class="recipe-ingredient-amount">';
+  body += '<h4 style="margin: 8px 0px 0px 0px;">Shots: </h4>';
   body += '<select class="recipe-ingredient-select"></select>';
-  body += '</div>';
-  body += '<div style="display: flex;">';
-  body += '<h4>Amount: </h4>';
-  body += '<input type="range" min="0" max="8" step="0.5" value="1" class="recipe-ingredient-amount" style="width: 150px;" oninput="this.nextElementSibling.value = this.value">';
-  body += '<output>1</output>'
-  body += '</div>';
   body += '</div>';
 
   return body;

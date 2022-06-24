@@ -1,8 +1,16 @@
-import RPi.GPIO as gpio
+import platform
+if platform.system() == "Windows":
+	__DEBUG__ = True
+else:
+	import RPi.GPIO as gpio
 import time
 SHOT_TIME = 17
 
 def setup():
+	if __DEBUG__:
+		print("Setting up GPIO...")
+		return
+
 	gpio.setmode(gpio.BCM)
 	gpio.setwarnings(False)
 
@@ -24,6 +32,12 @@ def setup():
 	gpio.output(20, gpio.HIGH)
 
 def stir():
+	if __DEBUG__:
+		print("Stirring... ", end='')
+		time.sleep(8)
+		print("Done!")
+		return
+	
     # mix the ingredients!
 	gpio.output(27, gpio.HIGH)
 	time.sleep(8)
@@ -32,13 +46,19 @@ def stir():
 def activatePumps(pumpArray):
 	for i in range(8):
 		if pumpArray[i] > 0:
-			gpio.output((i+2), gpio.HIGH)
+			if __DEBUG__:
+				print("Starting pump #" + str(i+2) + "...")
+			else:
+				gpio.output((i+2), gpio.HIGH)
 
 	while(any(pump > 0 for pump in pumpArray)):
 		time.sleep(SHOT_TIME)
 		for i in range(8):
 			if pumpArray[i] <= 1:
-				gpio.output((i+2), gpio.LOW)
+				if __DEBUG__:
+					print("Stopping pump #" + str(i+2) + "...")
+				else:
+					gpio.output((i+2), gpio.LOW)
 			pumpArray[i] -= 1
 	
 	stir()
@@ -46,5 +66,9 @@ def activatePumps(pumpArray):
 	return "Success!"
 
 def cleanup():
+	if __DEBUG__:
+		print("Cleaning up GPIO...")
+		return
+
 	gpio.output(20, gpio.LOW)
 	gpio.cleanup()

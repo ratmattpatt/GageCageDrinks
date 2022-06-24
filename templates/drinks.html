@@ -11,19 +11,24 @@
   <meta meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <body>
     <div id="view">
-      <div id="header-bar" class="closed" style="padding: 10px 20px; min-width: 650px;">
+      <div id="header-bar" class="closed" style="padding: 10px 20px;">
         <div class="wrapper header-wrapper" id="left-header-bar">
-              <div class="col-md header-column">
-                  <h1 style="margin-top: 10px;">Gage Cage Drinks</h1>
+              <div class="col-md">
+                  <h1 style="margin: 0px;" id="gage-cage">Gage Cage  </h1>
+                  <h1 style="margin: 0px;">Drinks</h1>
               </div>
         </div>
         <div class="wrapper header-wrapper" id="right-header-bar">
-              <div class="col-md header-column" id="stir-test">
-                  <span class="glyphicon glyphicon-refresh" style="cursor: pointer; font-size: 150%; margin: 10px; padding-top: 10px;"></span>
+              <div class="col-md icon-button " id="stir-button">
+                  <span class="glyphicon glyphicon-refresh"></span>
               </div>
-              <div class="col-md header-column" id="pumppicker-toggle">
-                  <span class="glyphicon glyphicon-cog" style="cursor: pointer; font-size: 150%; margin: 10px; padding-top: 10px;"></span>
-                  <h3 style="margin-top: 15px;">Current Pump Ingredients</h3>
+              <div class="col-md icon-button " id="list-all-button">
+                <span class="glyphicon glyphicon-list-alt"></span>
+              </div>
+              <div class="col-md" id="pump-picker-open" style="cursor: pointer;">
+                  <span class="glyphicon glyphicon-cog" style="font-size: 25px; margin-right: 5px;"></span>
+                  <h3 id="pump-ingredients-title-long" style="margin: 0px;">Current Pump Ingredients</h3>
+                  <h3 id="pump-ingredients-title-short" style="margin: 0px;">Pumps</h3>
               </div>
           </div>
       </div>
@@ -31,41 +36,42 @@
       
       <!-- EDIT PUMPS (SIDE BAR) -->
       <div id="pump-picker" class="closed">
-        <div class="sidebar-header" style="padding: 0px 15px;">
-          <h2>Edit Pumps</h2>
+        <div id="pump-picker-close" class="sidebar-header" style="padding: 0px 15px;">
+          <h2 style="display: inline-block">Edit Pumps</h2>
+          <span class="icon-button glyphicon glyphicon-chevron-right" style="display: inline-block;"></span>
         </div>
         <div class="container" style="width: 100%; background-color: #fefeff;">
           <div class="row-md pump-row-input">
               <h4>Pump 1: </h4>
-              <button type="button" class="btn btn-sm btn-pump" id="pump-button-1" style="margin: 0px 5px;">None</button>
+              <button type="button" class="btn btn-sm btn-pump" id="pump-button-1">None</button>
           </div>
           <div class="row-md pump-row-input">
               <h4>Pump 2: </h4>
-              <button type="button" class="btn btn-sm btn-pump" id="pump-button-2" style="margin: 0px 5px;">None</button>
+              <button type="button" class="btn btn-sm btn-pump" id="pump-button-2">None</button>
           </div>
           <div class="row-md pump-row-input">
               <h4>Pump 3: </h4>
-              <button type="button" class="btn btn-sm btn-pump" id="pump-button-3" style="margin: 0px 5px;">None</button>
+              <button type="button" class="btn btn-sm btn-pump" id="pump-button-3">None</button>
           </div>
           <div class="row-md pump-row-input">
               <h4>Pump 4: </h4>
-              <button type="button" class="btn btn-sm btn-pump" id="pump-button-4" style="margin: 0px 5px;">None</button>
+              <button type="button" class="btn btn-sm btn-pump" id="pump-button-4">None</button>
           </div>
           <div class="row-md pump-row-input">
               <h4>Pump 5: </h4>
-              <button type="button" class="btn btn-sm btn-pump" id="pump-button-5" style="margin: 0px 5px;">None</button>
+              <button type="button" class="btn btn-sm btn-pump" id="pump-button-5">None</button>
           </div>
           <div class="row-md pump-row-input">
               <h4>Pump 6: </h4>
-              <button type="button" class="btn btn-sm btn-pump" id="pump-button-6" style="margin: 0px 5px;">None</button>
+              <button type="button" class="btn btn-sm btn-pump" id="pump-button-6">None</button>
           </div>
           <div class="row-md pump-row-input">
               <h4>Pump 7: </h4>
-              <button type="button" class="btn btn-sm btn-pump" id="pump-button-7" style="margin: 0px 5px;">None</button>
+              <button type="button" class="btn btn-sm btn-pump" id="pump-button-7">None</button>
           </div>
           <div class="row-md pump-row-input">
               <h4>Pump 8: </h4>
-              <button type="button" class="btn btn-sm btn-pump" id="pump-button-8" style="margin: 0px 5px;">None</button>
+              <button type="button" class="btn btn-sm btn-pump" id="pump-button-8">None</button>
           </div>
         </div>
       </div>
@@ -80,9 +86,11 @@
 
       <!-- FOOTER BAR -->
       <div class="container" id="footer-bar">
-        <h4>Current Drink: </h4>
-        <div id="current-drink-container">
-          <h5 id="current-drink">None</h5>
+        <div>
+          <h4 style="display: inline-block; margin-right: 3px;">Current Drink: </h4>
+          <div id="current-drink-container" style="display: inline-block;">
+            <h5 id="current-drink">None</h5>
+          </div>
         </div>
         <button type="button" class="btn btn-danger" id="make-drink">Make Drink!</button>
       </div>
@@ -92,52 +100,42 @@
       <div id="create-drink-modal" class="modal" style="overflow-y: scroll">
         <div class="modal-content" id="create-drink-modal-content">
             <span class="modal-close" id="create-drink-modal-close">&times;</span>
-          <div class="modal-header" id="create-drink-modal-header" style="display: block; border-bottom: 0px;">
-            <div style="display: flex;">
-              <h2 style="margin: 10px;">Drink Name: </h2>
-              <input type="text" placeholder="" id="create-drink-name" style="height: 30px; margin: 10px; width: 50%; border-radius: 5px; border: 1px solid #888888"/>
+          <div class="modal-header" id="create-drink-modal-header">
+            <h2 class="modal-title">Drink Name: </h2>
+            <input type="text" placeholder="" id="create-drink-name" style="width: 100%; border: 1px solid #888888"/>
+            <div class="modal-container" style="margin-top: 10px;">
+              <h4>Glass: </h4>
+              <select id="create-drink-glass-type" style="height: 30px; width: 60%;">
+                <option value="cognac">Cognac</option>
+                <option value="cosmo">Cosmo</option>
+                <option value="hurricane">Hurricane</option>
+                <option value="margarita">Margarita</option>
+                <option value="martini">Martini</option>
+                <option value="pint">Pint</option>
+                <option value="short">Short</option>
+                <option selected="selected" value="tall">Tall</option>
+                <option value="tom_collins">Tom Collins</option>
+                <option value="wine">Wine</option>
+              </select>
             </div>
-            <div style="display: flex; justify-content: space-between">
-              <div style="display: flex;">
-                <h4 style="margin: 14px 10px 10px 10px">Glass Type: </h4>
-                <select id="create-drink-glass-type" style="height: 30px; margin: 10px;">
-                  <option value="cognac">Cognac</option>
-                  <option value="cosmo">Cosmo</option>
-                  <option value="hurricane">Hurricane</option>
-                  <option value="margarita">Margarita</option>
-                  <option value="martini">Martini</option>
-                  <option value="pint">Pint</option>
-                  <option value="short">Short</option>
-                  <option selected="selected" value="tall">Tall</option>
-                  <option value="tom_collins">Tom Collins</option>
-                  <option value="wine">Wine</option>
-                </select>
-              </div>
-              <div style="display: flex;">
-                <h4 style="margin: 14px 10px 10px 10px">Color:</h4>
-                <div id="color-input-wrapper" style="background-color: #888888; margin: 10px; height: 30px; width: 30px; border-radius: 50%;">
-                  <input id="create-drink-color-picker" type="color" value="#888888" style="height: 30px; width: 30px; opacity: 0;"/>
-                </div>
+            <div class="modal-container">
+              <h4>Color:</h4>
+              <div id="color-input-wrapper">
+                <input id="create-drink-color-picker" type="color" value="#888888" style="width: 60%; opacity: 0;"/>
               </div>
             </div>
           </div>
-          <div class="modal-body" id="create-drink-modal-body" style="padding: 0px 15px; border-bottom: 1px solid #888888; border-top: 1px solid #888888;">
+          <div class="modal-body" id="create-drink-modal-body" style="padding-bottom: 0px;">
             <div class="row-md drink-ingredient-create">
-              <div style="display: flex;">
-                <h4 style="margin-top: 14px;">Ingredient: </h4>
-                <select class="recipe-ingredient-select"></select>
-              </div>
-              <div style="display: flex;">
-                <h4 style="margin-top: 14px;">Amount: </h4>
-                <input type="range" min="0" max="8" step="0.5" value="1" class="recipe-ingredient-amount" style="width: 150px;" oninput="this.nextElementSibling.value = this.value">
-                <output style="margin-top: 9px;">1</output>
-              </div>
+              <input type="number" min="0.5" max="8" step="0.5" value="1" class="recipe-ingredient-amount">
+              <h4 style="margin: 8px 0px 0px 0px;">Shots: </h4>
+              <select class="recipe-ingredient-select"></select>
             </div>
           </div>
           <div class="modal-footer" id="create-drink-modal-footer">
-            <button class="btn btn-primary" id="add-ingredient" style="width: 100%; margin: 5px;"><span class="glyphicon glyphicon-plus"></span> Add Another Ingredient To This Recipe</button>
-            <button class="btn btn-warning" id="create-ingredient-modal-button1" style="width: 100%; margin: 5px;"><span class="glyphicon glyphicon-plus"></span> Create New Ingredient</button>
-            <button class="btn btn-primary" id="create-drink-button" style="width: 100%; margin: 5px;"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+            <button class="btn btn-primary modal-footer-button" id="add-ingredient"><span class="glyphicon glyphicon-plus"></span> Add an Ingredient to this Recipe</button>
+            <button class="btn btn-warning modal-footer-button" id="create-ingredient-modal-button1"><span class="glyphicon glyphicon-plus"></span> Create New Ingredient</button>
+            <button class="btn btn-primary modal-footer-button" id="create-drink-button"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
           </div>
         </div>
       </div>
@@ -145,14 +143,14 @@
       <div id="choose-ingredient-modal" class="modal">
         <div class="modal-content">
             <span class="modal-close" id="choose-ingredient-modal-close">&times;</span>
-          <div class="modal-header" id="choose-ingredient-modal-header" style="border-bottom: 0px;">
-            <h2 style="margin: 10px;">Choose Ingredient: </h2>
-            <select id="ingredient-select"></select>
+          <div class="modal-header" id="choose-ingredient-modal-header">
+            <h2 class="modal-title">Choose Ingredient: </h2>
+            <select id="ingredient-select" style="width: 100%;"></select>
           </div>
-          <div class="modal-body" id="choose-ingredient-modal-body" style="display: flex; flex-direction: column; border-top: 1px solid #888888;">
-            <button class="btn btn-warning" id="create-ingredient-modal-button2" style="width: 100%; margin: 5px;"><span class="glyphicon glyphicon-plus"></span> Create New Ingredient</button>
-            <button class="btn btn-primary" id="choose-ingredient-button" style="width: 100%; margin: 5px;"><span class="glyphicon glyphicon-ok"></span> Choose</button>
-            <button class="btn btn-success" id="clean-pump-button" style="width: 100%; margin: 5px;"><span class="glyphicon glyphicon-tint"></span> Clean Pump</button>
+          <div class="modal-body" id="choose-ingredient-modal-body" style="display: flex; flex-direction: column; border-top: 1px solid #888888; padding-right: 25px;">
+            <button class="btn btn-warning modal-footer-button" id="create-ingredient-modal-button2"><span class="glyphicon glyphicon-plus"></span> Create New Ingredient</button>
+            <button class="btn btn-primary modal-footer-button" id="choose-ingredient-button"><span class="glyphicon glyphicon-ok"></span> Choose</button>
+            <button class="btn btn-success modal-footer-button" id="clean-pump-button"><span class="glyphicon glyphicon-tint"></span> Clean Pump</button>
           </div>
         </div>
       </div>
@@ -160,23 +158,23 @@
       <div id="create-ingredient-modal" class="modal">
         <div class="modal-content" id="create-ingredient-modal-content">
             <span class="modal-close" id="create-ingredient-modal-close">&times;</span>
-          <div class="modal-header" id="create-ingredient-modal-header" style="border-bottom: 0px;">
-            <h2 style="margin: 10px;">Create New Ingredient: </h2>
+          <div class="modal-header" id="create-ingredient-modal-header">
+            <h2 class="modal-title">Create New Ingredient: </h2>
           </div>
-          <div class="modal-body" id="create-ingredient-modal-body" style="padding: 0px 15px; border-bottom: 1px solid #888888; border-top: 1px solid #888888;">
-            <div style="display: flex; justify-content: space-between;">
-              <h3>Name: </h3>
-              <input type="text" id="new-ingredient" style="height: 30px; margin: 18px 10px 10px 10px; width: 50%; border-radius: 5px; border: 1px solid #888888">
+          <div class="modal-body" id="create-ingredient-modal-body">
+            <div class="modal-container">
+              <h4>Name: </h4>
+              <input type="text" id="new-ingredient" style="width: 60%; margin-left: 5px; border: 1px solid #888888">
             </div>
-            <div>
-              <input type="checkbox" id="pumpable-checkbox">
-              <label for="pumpable-checkbox">
-                New ingredient pumpable?
+            <div class="modal-container">
+              <label for="pumpable-checkbox" style="font-weight: 100; margin-top: 5px;">
+                Pumpable?
               </label>
+              <input type="checkbox" id="pumpable-checkbox">
             </div>
           </div>
           <div class="modal-footer" id="create-ingredient-modal-footer" style="display: flex; flex-direction: column;">
-            <button class="btn btn-success" id="create-ingredient-button" style="width: 100%;"><span class="glyphicon glyphicon-plus"></span> Create</button>
+            <button class="btn btn-success modal-footer-button" id="create-ingredient-button" style="margin: 0px;"><span class="glyphicon glyphicon-plus"></span> Create</button>
           </div>
         </div>
       </div>
