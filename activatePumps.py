@@ -3,6 +3,7 @@ if platform.system() == "Windows":
 	__DEBUG__ = True
 else:
 	import RPi.GPIO as gpio
+	__DEBUG__ = False
 import time
 SHOT_TIME = 17
 
