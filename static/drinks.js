@@ -392,6 +392,7 @@ $(document).ready(function() {
       newRecipe.unpumpable = unpumpableObj;
       newRecipe.color = color;
       newRecipe.glass_type = glasstype;
+      newRecipe.times_mixed = 0;
   
       // Send new recipe to the server
       ajaxPOST("recipes", JSON.stringify(newRecipe));
