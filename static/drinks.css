@@ -58,6 +58,11 @@
     margin-right: 0px;
     display: flex;
 }
+#pump-picker-arrow {
+    cursor: pointer;
+    font-size: 25px;
+    margin: 10px;
+}
 .pump-row-input, .pump-profile, .pump-row-save, .pump-row-edit, .pump-row-delete {
     display: flex;
     align-items: center;
@@ -234,7 +239,7 @@ h3 {
         display: none;
     }
 }
-@media (max-width: 550px) {
+@media (max-width: 600px) {
     #pump-ingredients-title-long {
         display: none;
     }
@@ -242,7 +247,7 @@ h3 {
         display: block;
     }
 }
-@media (min-width: 550px) {
+@media (min-width: 600px) {
     #pump-ingredients-title-long {
         display: block;
     }

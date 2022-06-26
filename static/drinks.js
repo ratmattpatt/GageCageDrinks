@@ -217,7 +217,7 @@ $(document).ready(function() {
       alert("You don't have the correct ingredients in the pumps right now to make this drink!");
     }
   });
-  $("#list-all-button").on("click touchstart", function() {
+  $("#list-all-button").on("click tap", function() {
     showAllRecipes = !showAllRecipes;
     updateDrinkPanels();
 
@@ -246,24 +246,24 @@ $(document).ready(function() {
   
       updateIngredientSelector();
   });
-  $("#create-ingredient-modal-button1").on("click touchstart", function() {
+  $("#create-ingredient-modal-button1").on("click tap", function() {
     $('#create-ingredient-modal').css("display", "block");
     console.log("opening modal...");
   });
-  $("#create-ingredient-modal-button2").on("click touchstart", function() {
+  $("#create-ingredient-modal-button2").on("click tap", function() {
     $('#create-ingredient-modal').css("display", "block");
     console.log("opening modal...");
   });
-  $('#choose-ingredient-modal-close').on("click touchstart", function() {
+  $('#choose-ingredient-modal-close').on("click tap", function() {
     $('#choose-ingredient-modal').css("display", "none");
   });
-  $('#create-ingredient-modal-close').on("click touchstart", function() {
+  $('#create-ingredient-modal-close').on("click tap", function() {
     $('#create-ingredient-modal').css("display", "none");
   });
-  $('#create-drink-modal-close').on("click touchstart", function() {
+  $('#create-drink-modal-close').on("click tap", function() {
     $('#create-drink-modal').css("display", "none");
   });
-  $('#create-ingredient-button').on("click touchstart", function() {
+  $('#create-ingredient-button').on("click tap", function() {
     let pumpable = serverData["pumpable"];
     let unpumpable = serverData["unpumpable"]; 
     let field = document.getElementById("new-ingredient");
@@ -342,7 +342,7 @@ $(document).ready(function() {
       s.options[s.options.length] = new Option(capitalize(unpumpable[u]), unpumpable[u]);
   });
   
-  $("#create-drink-button").on("click touchstart", function() {    
+  $("#create-drink-button").on("click tap", function() {    
     // Get the new recipe data
     let name = $("#create-drink-name").val();
     let createSelect = document.getElementsByClassName("recipe-ingredient-select");
@@ -419,7 +419,7 @@ $(document).ready(function() {
     $('#create-drink-modal').css("display", "none");
   });
   
-  $("#choose-ingredient-button").on("click touchstart", function() {
+  $("#choose-ingredient-button").on("click tap", function() {
     let pumps = serverData["pumps"];
     let ingredient = document.getElementById("ingredient-select").value;
 
@@ -438,7 +438,7 @@ $(document).ready(function() {
     $('#choose-ingredient-modal').css("display", "none");
   });
 
-  $("#clean-pump-button").on("click touchstart", function() {
+  $("#clean-pump-button").on("click tap", function() {
     if (confirm("Please confirm that the selected pump has water in it and there is a cup in the machine.")) {
       let tempPumpArray = [];
       let pumps = serverData["pumps"];
@@ -465,7 +465,7 @@ $(document).ready(function() {
     document.getElementById("color-input-wrapper").style.backgroundColor = color;
   });
 });
-$(document).on("click touchstart", function(e) {
+$(document).on("click tap", function(e) {
   let recipes = serverData["recipes"];
 
   if (e.target.classList.value.includes("drink-display")) {
