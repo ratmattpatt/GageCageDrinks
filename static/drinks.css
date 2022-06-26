@@ -225,6 +225,26 @@
 #create-drink-modal-footer {
     padding-right: 25px;
 }
+.loader {
+    border: 20px solid #f3f3f3; /* Light grey */
+    border-top: 20px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    animation: spin 2s linear infinite;
+}
+#loading-modal-content {
+    border: none;
+    box-shadow: none;
+    background-color: #ffffff00;
+    top: 260px;
+    left: calc((100vw - 210px) / 2);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
 /******************************************* GENERAL *******************************************/
 h1 {

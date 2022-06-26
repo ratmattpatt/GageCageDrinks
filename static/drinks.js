@@ -26,6 +26,7 @@ function ajaxGET(address) {
   });
 }
 function ajaxPOST(address, data) { 
+  $("#loading-modal").css("display", "block");
   return $.ajax({
     type: "POST",
     contentType: "application/json",
@@ -36,8 +37,10 @@ function ajaxPOST(address, data) {
         alert("Drink machine is currently in use! Please wait until the machine is done making the current drink before you make yours!")
       else
         console.log(d);
+      $("#loading-modal").css("display", "none");
     },
     error: function(e) {
+      $("#loading-modal").css("display", "none");
       console.error(e);
     } 
   });
