@@ -187,6 +187,7 @@ window.addEventListener('load', function() {
   updateCurrentPumpIngredients();
   updateDrinkPanels();
   updateIngredientLists();
+  ajaxGET("stir");
 });
 // Add click listeners:
 $(document).ready(function() {
