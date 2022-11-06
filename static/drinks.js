@@ -18,7 +18,8 @@ function ajaxGET(address) {
     contentType: "application/json",
     url: DRINKSERVER + address,
     success: function(data) {
-      serverData[address] = JSON.parse(data);
+      if (data != "Stirring complete")
+        serverData[address] = JSON.parse(data);
     },
     error: function(e) {
       console.error(e);
@@ -54,7 +55,7 @@ function checkDrink() {
     return false;
   
   let canMake = (p, r) =>  Object.keys(r).every(i => p.includes(i));
-  let makeable = canMake(pumps, required);
+  makeable = canMake(pumps, required);
 
   if (makeable) {
     $("#make-drink").removeClass("btn-danger");
@@ -219,6 +220,7 @@ $(document).ready(function() {
       }
     } else {
       alert("You don't have the correct ingredients in the pumps right now to make this drink!");
+      console.log(currentRecipe, serverData["pumps"]);
     }
   });
   $("#list-all-button").on("click tap", function() {

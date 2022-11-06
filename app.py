@@ -95,7 +95,7 @@ def unpumpable():
 
 @app.route("/stir", methods=['GET'])
 def run_stirrer():
-	stir()
+	return stir()
 
 
 if __name__ == "__main__":

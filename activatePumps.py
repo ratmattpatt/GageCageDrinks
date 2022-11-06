@@ -37,12 +37,13 @@ def stir():
 		print("Stirring... ", end='')
 		time.sleep(8)
 		print("Done!")
-		return
+		return "Stirring complete"
 	
     # mix the ingredients!
 	gpio.output(27, gpio.HIGH)
 	time.sleep(8)
 	gpio.output(27, gpio.LOW)
+	return "Stirring complete"
 
 def activatePumps(pumpArray):
 	for i in range(8):
