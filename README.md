@@ -1,3 +1,4 @@
+# Drink Machine
 Code for a house drink machine I created with my roommates. 
 
 A flask server is hosted on a Raspberry Pi that we had lying around. Any device (cell phone, or the iPad built into the machine) on the local network can connect to the server and control the machine.
