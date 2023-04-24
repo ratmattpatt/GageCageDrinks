@@ -193,6 +193,7 @@ window.addEventListener('load', function() {
 // Add click listeners:
 $(document).ready(function() {
   $('#make-drink').on("click touchstart", function() {
+    console.log("current recipe:", currentRecipe);
     let manualAdditions = "";
     
     if (currentRecipe.times_mixed == undefined)
@@ -206,7 +207,7 @@ $(document).ready(function() {
             manualAdditions += "Top up with ";
           else {
             manualAdditions += currentRecipe.unpumpable[u] + " shot";
-            if (currentRecpie.unpumpable[u] > 1)
+            if (currentRecipe.unpumpable[u] > 1)
               manualAdditions += "s";
             manualAdditions += " of ";
           }
