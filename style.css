@@ -1,0 +1,38 @@
+<style>
+    /* CSS styles for the kiosk interface */
+    .menu-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+    .menu-item:last-child {
+        border-bottom: none;
+    }
+    .menu-item span {
+        font-weight: bold;
+    }
+    .menu-item img {
+        height: 80px; /* Adjust the height as desired */
+        margin-right: 10px;
+    }
+    #order-summary {
+        margin-top: 20px;
+    }
+    .remove-button {
+        background-color: #f44336;
+        color: white;
+        padding: 6px 12px;
+        border: none;
+        cursor: pointer;
+    }
+    #place-order-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+</style>
