@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Barbuddy's Opening Page</title>
+    <style>
+        body {
+            text-align: center;
+            padding-top: 100px;
+            background-color: #001f3f; /* Darker blue */
+            overflow: hidden;
+        }
+        h1 {
+            margin-bottom: 30px;
+            color: white;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .bubble {
+            position: absolute;
+            bottom: 0;
+            width: 30px; /* Smaller bubble size */
+            height: 30px; /* Smaller bubble size */
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.8);
+            animation: bubble-rise 4s linear infinite; /* Continuous animation */
+            transform: translate(-50%, -50%); /* Center the bubble */
+            z-index: -1; /* Push the bubbles behind the content */
+        }
+        .button.clicked {
+            animation: bubble-rise 8s linear infinite; /* Slower animation after button click */
+        }
+        @keyframes bubble-rise {
+            0% {
+                bottom: 0;
+                opacity: 0; /* Start with zero opacity */
+                transform: translateX(-50%) scale(0); /* Start with zero size */
+            }
+            50% {
+                opacity: 1; /* Increase opacity halfway */
+                transform: translateX(-50%) scale(1); /* Grow to full size */
+            }
+            100% {
+                bottom: 100vh;
+                opacity: 0; /* Fade out at the top */
+                transform: translateX(-50%) scale(0); /* Shrink to zero size */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to BarBuddy</h1>
+    <button class="button" onclick="viewDrinkMenu()">View Drink Menu</button>
+
+    <script>
+        function viewDrinkMenu() {
+            document.querySelector('.button').classList.add('clicked');
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 500);
+        }
+    </script>
+
+    <script>
+        createBubbles();
+
+        function createBubbles() {
+            for (let i = 0; i < 50; i++) { /* Increased number of bubbles */
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                bubble.style.left = Math.random() * 100 + 'vw';
+                bubble.style.animationDelay = Math.random() * 3 + 's'; /* Staggered animation delays */
+                document.body.appendChild(bubble);
+            }
+        }
+    </script>
+</body>
+</html>
