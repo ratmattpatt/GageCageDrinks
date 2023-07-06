@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>McDonald's Self-Serve Kiosk</title>
+    <style>
+        /* CSS styles for the kiosk interface */
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        .menu-item span {
+            font-weight: bold;
+        }
+        .menu-item img {
+        height: 100px; /* Adjust the height as desired */
+        margin-right: 10px;
+        }
+	.description-button {
+            background-color: #007bff;
+            color: white;
+            padding: 4px 8px;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #000;
+            border-radius: 10px;
+            z-index: 9999;
+            display: none;
+	    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .popup-content {
+            color: black;
+            text-align: center;
+            position: relative;
+        }
+        .close-button {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+	    color: red;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .popup p {
+            margin-bottom: 0;
+        }
+        #order-summary {
+            margin-top: 20px;
+        }
+        .remove-button {
+            background-color: #f44336;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            cursor: pointer;
+        }
+        #place-order-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+</style>
+</head>
+<body>
+    <h1>Welcome to the BarBuddy Self Serve Bar!</h1>
+
+    <h2>Menu</h2>
+    <div id="menu">
+        <div class="menu-item">
+            <img src="C:\Users\minep\OneDrive\Documents\gin_and_tonic.jpg" alt="Gin & Tonic">
+	    <div>
+            	<span>Gin & Tonic</span>
+	 	<button class="description-button" data-description="I don't know how I could describe this better than the name. Gin + Tonic = Gin & Tonic">Description</button>
+            	<button class="add-to-order-button" data-name="Gin & Tonic" data-price="4.99">Add to Order</button>
+	    </div>
+        </div>
+
+        <div class="menu-item">
+            <img src="C:\Users\minep\OneDrive\Documents\grateful_dead.jpg" alt="Grateful Dead">
+	    <div>
+            	<span>Grateful Dead</span>
+		<button class="description-button" data-description="You'll be Grateful you die one day after consuming this hangover inducing beverage.">Description</button>
+            	<button class="add-to-order-button" data-name="Grateful Dead" data-price="3.99">Add to Order</button>
+	    </div>
+        </div>
+
+	<div class="menu-item">
+            <img src="C:\Users\minep\OneDrive\Documents\vodka_Cran.jpg" alt="Vodka Cran">
+	    <div>
+            	<span>Vodka Cran</span>
+	 		<button class="description-button" data-description="If you can't figure out what's in this drink, then maybe you shouldn't be served at a bar in the first place...">Description</button>
+            		<button class="add-to-order-button" data-name="Vodka Cran" data-price="4.99">Add to Order</button>
+	    </div>
+        </div>
+
+	<div class="menu-item">
+            <img src="C:\Users\minep\OneDrive\Documents\dark and stormy.jpg" alt="Dark & Stormy">
+	    <div>
+            	<span>Dark & Stormy</span>
+	 		<button class="description-button" data-description="You're walking down a dark alleyway. Its night. Its stormy. You see a tall figure appear at the end of the path. You try to run. Screaming. But no sound comes out. Nor do your feet move. The dark shadow approaches you with something in their hands. It's a Drink. You take a sip. It is a cool, refreshing, breeze compared to the nightmare that is your life. A Dark & Stormy. Escape your problems with booze!">Description</button>
+            		<button class="add-to-order-button" data-name="Dark & Stormy" data-price="4.99">Add to Order</button>
+	    </div>
+        </div>
+
+	<div class="menu-item">
+            <img src="C:\Users\minep\OneDrive\Documents\margarita.jpg" alt="Margarita">
+	    <div>
+		<span>Margarita</span>
+	 	<button class="description-button" data-description="Don't make an Ass of yourself. I've seen one too many Grandma's get butt naked because of this drink...">Description</button>
+            	<button class="add-to-order-button" data-name="Margarita" data-price="4.99">Add to Order</button>
+	    </div>
+        </div>
+
+	<div class="menu-item">
+            <img src="C:\Users\minep\OneDrive\Documents\screwdriver.jpg" alt="Screwdriver">
+	    <div>
+            	<span>Screwdriver</span>
+	 	<button class="description-button" data-description="The perfect drink for all the times you disappointed your father not knowing the difference between a Phillps and a Flat Tip. We don't have Daddy Issues, you do!">Description</button>
+            	<button class="add-to-order-button" data-name="Screwdriver" data-price="4.99">Add to Order</button>
+	    </div>
+        </div>
+
+
+	<div class="menu-item">
+            <img src="C:\Users\minep\OneDrive\Documents\juicer.jpg" alt="Juicer">
+	    <div>
+            	<span>Juicer</span>
+	 	<button class="description-button" data-description="For some reason this drink does not exist on the Internet. This Drink is literally just juice and Booze. Enjoy the Hnagover!">Description</button>
+            	<button class="add-to-order-button" data-name="Juicer" data-price="4.99">Add to Order</button>
+	    </div>
+        </div>
+
+	<div class="menu-item">
+            <img src="C:\Users\minep\OneDrive\Documents\teq cran.jpg" alt="Tequila Cran">
+	    <div>
+            	<span>Tequila Cran</span>
+	 	<button class="description-button" data-description="A Vodka Cran. But hold the Vodka. And add Tequila.">Description</button>
+            	<button class="add-to-order-button" data-name="Tequila Cran" data-price="4.99">Add to Order</button>
+	    </div>
+        </div>
+
+	<div class="menu-item">
+            <img src="C:\Users\minep\OneDrive\Documents\sour jack.jpg" alt="Sour Jack">
+	    <div>
+            	<span>Sour Jack</span>
+	 	<button class="description-button" data-description="This is a drink. It is sour. It is named after Jack. That is all.">Description</button>
+            	<button class="add-to-order-button" data-name="Sour Jack" data-price="4.99">Add to Order</button>
+	    </div>
+        </div>
+
+	<div class="menu-item">
+            <img src="C:\Users\minep\OneDrive\Documents\applejack.jpg" alt="AppleJack">
+	    <div>
+            	<span>AppleJack</span>
+	 	<button class="description-button" data-description="AppleJack: Whiskey plus Apple Juice"> Description</button>
+            	<button class="add-to-order-button" data-name="AppleJack" data-price="4.99">Add to Order</button>
+	    </div>
+        </div>
+<div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-button" onclick="closePopup()">X</span>
+            <p id="popup-description"></p>
+        </div>
+    </div>
+<script>
+        const descriptionButtons = document.querySelectorAll('.description-button');
+        const popup = document.getElementById('popup');
+        const popupDescription = document.getElementById('popup-description');
+
+        descriptionButtons.forEach(button => {
+            button.addEventListener('click', showDescription);
+        });
+
+        function showDescription(event) {
+            const button = event.target;
+            const description = button.dataset.description;
+
+            popupDescription.textContent = description;
+            popup.style.display = 'block';
+        }
+
+        function closePopup() {
+            popup.style.display = 'none';
+        }
+
+    </script>
+<h2>Your Order</h2>
+    <div id="order-summary">
+        <p>No items in order.</p>
+    </div>
+
+    <button id="place-order-button" onclick="placeOrder()">Place Order</button>
+
+    <script>
+        const addToOrderButtons = document.querySelectorAll('.add-to-order-button');
+        const orderItems = [];
+
+        addToOrderButtons.forEach(button => {
+            button.addEventListener('click', addToOrder);
+        });
+
+        function addToOrder(event) {
+            const button = event.target;
+            const itemName = button.dataset.name;
+            const itemPrice = parseFloat(button.dataset.price);
+
+            orderItems.push({ name: itemName, price: itemPrice });
+            updateOrderSummary();
+        }
+
+        function removeItem(index) {
+            orderItems.splice(index, 1);
+            updateOrderSummary();
+        }
+
+        function updateOrderSummary() {
+            const orderSummary = document.getElementById('order-summary');
+            orderSummary.innerHTML = '';
+
+            if (orderItems.length === 0) {
+                orderSummary.innerHTML = '<p>No items in order.</p>';
+                return;
+            }
+
+            let total = 0;
+            for (let i = 0; i < orderItems.length; i++) {
+                const item = orderItems[i];
+                const itemText = document.createElement('p');
+                itemText.innerHTML = item.name + ' - $' + item.price.toFixed(2) + ' <button class="remove-button" onclick="removeItem(' + i + ')">Remove</button>';
+                orderSummary.appendChild(itemText);
+                total += item.price;
+            }
+
+            const totalText = document.createElement('p');
+            totalText.innerHTML = '<strong>Total: $' + total.toFixed(2) + '</strong>';
+            orderSummary.appendChild(totalText);
+        }
+
+        function placeOrder() {
+            if (orderItems.length === 0) {
+                alert('Please add items to your order.');
+                return;
+            }
+
+            // TODO: Add logic to process the order
+
+            alert('Your order has been placed. Thank you!');
+            orderItems.length = 0;
+            updateOrderSummary();
+        }
+    </script>
+</body>
+</html>
